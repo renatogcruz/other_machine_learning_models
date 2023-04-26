@@ -1,0 +1,2 @@
+       Sex       Fare     Pclass        Age      Parch      SibSp   Embarked 
+124.426330  41.638848  35.113750  23.757312  16.153062  16.074156   8.467628 

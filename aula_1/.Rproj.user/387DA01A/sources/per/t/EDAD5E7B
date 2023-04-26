@@ -1,9 +1,9 @@
 {
     "id": "EDAD5E7B",
-    "path": "C:/Users/Renato/Dropbox/pos_usp/usp_fechado/unidade_2/03_outros_modelos_ml/OMML1_script00_instalando_e_carregando_pacotes.R",
+    "path": "C:/Users/Renato/Dropbox/pos_usp/ML/neural_network_algorithms/aula_1/OMML1_script00_instalando_e_carregando_pacotes.R",
     "project_path": "OMML1_script00_instalando_e_carregando_pacotes.R",
     "type": "r_source",
-    "hash": "2877489868",
+    "hash": "2971436248",
     "contents": "",
     "dirty": false,
     "created": 1650886773845.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "21,0",
-        "scrollLine": "3"
+        "cursorPosition": "24,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1644088376,
+    "lastKnownWriteTime": 1682533548,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1644088376,
+    "last_content_update": 1682533548465,
     "read_only": false,
     "read_only_alternatives": []
 }

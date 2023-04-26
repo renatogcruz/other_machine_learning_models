@@ -15,9 +15,9 @@ arvore <- rpart::rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Em
                 data=treino,
                 method='class',
                 xval=5,
-                control = rpart.control(cp = 0, 
-                                        minsplit = 1, 
-                                        maxdepth = 30)
+                control = rpart.control(cp = 0,         # parametro de complexidade
+                                        minsplit = 1,   # minimo de obs por split
+                                        maxdepth = 30)  # 
 )
 
 # Verificando a complexidade da árvore
@@ -35,9 +35,17 @@ tab <- table(c_treino, treino$Survived)
 acc <- (tab[1,1]+tab[2,2])/nrow(treino)
 sprintf('Acurácia na base de treino: %s ', percent(acc))
 
+sink(file = '_out/script_002/output/acc_treino.txt')
+print(acc)
+sink()
+
 tab <- table(c_teste, teste$Survived)
 acc <- (tab[1,1]+tab[2,2])/nrow(teste)
-sprintf('Acurácia na base de treino: %s ', percent(acc))
+sprintf('Acurácia na base de teste: %s ', percent(acc))
+
+sink(file = '_out/script_002/output/acc_teste.txt')
+print(acc)
+sink()
 
 
 ###############################
@@ -58,6 +66,11 @@ aval_treino <- data.frame(obs=treino$Survived,
 
 caret::twoClassSummary(aval_treino, lev=levels(aval_treino$obs))
 
+
+sink(file = '_out/script_002/output/aval_treino.txt')
+print(caret::twoClassSummary(aval_treino, lev=levels(aval_treino$obs)))
+sink()
+
 # Podemos usar o mesmo dataframe para fazer a curva ROC:
 CurvaROC <- ggplot2::ggplot(aval_treino, aes(d = obs, m = Y, colour='1')) + 
   plotROC::geom_roc(n.cuts = 0) +
@@ -66,6 +79,12 @@ CurvaROC <- ggplot2::ggplot(aval_treino, aes(d = obs, m = Y, colour='1')) +
   ggtitle("Curva ROC - base de treino")
   
 CurvaROC
+
+
+# salvando em .png
+dev.print(file = '_out/script_002/figures/roc_treino.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
 
 ############################################
 # Avaliar a árvore na base de teste
@@ -84,6 +103,10 @@ aval_teste <- data.frame(obs=teste$Survived,
 
 twoClassSummary(aval_teste, lev=levels(aval_teste$obs))
 
+sink(file = '_out/script_002/output/aval_teste.txt')
+print(twoClassSummary(aval_teste, lev=levels(aval_teste$obs)))
+sink()
+
 # Podemos usar o mesmo dataframe para fazer a curva ROC:
 CurvaROC <- ggplot(aval_teste, aes(d = obs, m = Y, colour='a')) + 
   plotROC::geom_roc(n.cuts = 0) +
@@ -93,13 +116,27 @@ CurvaROC <- ggplot(aval_teste, aes(d = obs, m = Y, colour='a')) +
 
 CurvaROC
 
+# salvando em .png
+dev.print(file = '_out/script_002/figures/roc_teste.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
+
+
 ##########################
 # pós-poda (Grid Search) #
 ##########################
 tab_cp <- rpart::printcp(arvore)
 tab_cp
 
+sink(file = '_out/script_002/output/tab_cp_pos_poda.txt')
+print(tab_cp)
+sink()
+
 plotcp(arvore)
+# salvando em .png
+dev.print(file = '_out/script_002/figures/arvore.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
 
 tab_cp[which.min(tab_cp[,'xerror']),]
 cp_min <- tab_cp[which.min(tab_cp[,'xerror']),'CP']
@@ -128,6 +165,10 @@ aval_treino <- data.frame(obs=treino$Survived,
 
 caret::twoClassSummary(aval_treino, lev=levels(aval_treino$obs))
 
+sink(file = '_out/script_002/output/aval_treino_pos_poda.txt')
+print(caret::twoClassSummary(aval_treino, lev=levels(aval_treino$obs)))
+sink()
+
 # Podemos usar o mesmo dataframe para fazer a curva ROC:
 CurvaROC <- ggplot2::ggplot(aval_treino, aes(d = obs, m = Y, colour='1')) + 
   plotROC::geom_roc(n.cuts = 0) +
@@ -136,6 +177,10 @@ CurvaROC <- ggplot2::ggplot(aval_treino, aes(d = obs, m = Y, colour='1')) +
   ggtitle("Curva ROC - base de treino")
 
 CurvaROC
+
+# salvando em .png
+dev.print(file = '_out/script_002/figures/CurvaROC_pos_poda_treino.png',
+          device = png, width = 1024, height = 768, res = 2*72)
 
 ############################################
 # Avaliar a árvore na base de teste
@@ -154,6 +199,10 @@ aval_teste <- data.frame(obs=teste$Survived,
 
 twoClassSummary(aval_teste, lev=levels(aval_teste$obs))
 
+sink(file = '_out/script_002/output/aval_teste_pos_poda.txt')
+print(twoClassSummary(aval_teste, lev=levels(aval_teste$obs)))
+sink()
+
 # Podemos usar o mesmo dataframe para fazer a curva ROC:
 CurvaROC <- ggplot(aval_teste, aes(d = obs, m = Y, colour='a')) + 
   plotROC::geom_roc(n.cuts = 0) +
@@ -163,4 +212,7 @@ CurvaROC <- ggplot(aval_teste, aes(d = obs, m = Y, colour='a')) +
 
 CurvaROC
 
+# salvando em .png
+dev.print(file = '_out/script_002/figures/CurvaROC_pos_poda_teste.png',
+          device = png, width = 1024, height = 768, res = 2*72)
 

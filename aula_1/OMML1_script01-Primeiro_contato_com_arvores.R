@@ -3,8 +3,10 @@
 # cuja fonte está na library(titanic)#
 #data("Titanic")
 #Titanic
+setwd("C:\\Users\\Renato\\Dropbox\\pos_usp\\ML\\neural_network_algorithms\\aula_1")
+titanic <- as.data.frame(read_excel("titanic.xlsx"))
+head(titanic)
 titanic %>% head
-
 #################################
 # Nosso objetivo:
 #      Classificar passageiros sobreviventes de acordo 
@@ -17,8 +19,8 @@ titanic %>% head
 
 # Vamos criar uma base temporária para manter a base original intacta
 tmp <- titanic
-tmp$survived <- as.integer(Titanic$Survived=="Y")
-
+tmp$survived <- as.integer(titanic$Survived=="Y")
+titanic
 ##########################################
 # Função para fazer a análise descritiva #
 # Vamos avaliar a distribuição de sobreviventes por cada variável X
@@ -62,18 +64,29 @@ descritiva("Parch")
 tmp$cat_age <- quantcut(tmp$Age, 20)
 descritiva("cat_age")
 
+# salvando em .png
+dev.print(file = '_out/script_001/figures/cat_age.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
 tmp$cat_fare <- quantcut(tmp$Fare, 10)
 descritiva("cat_fare")
 
+# salvando em .png
+dev.print(file = '_out/script_001/figures/cat_fare.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
 # Listagem das variáveis com algumas características
+titanic$Embarked <- as.factor(titanic$Embarked)
+titanic$Sex <- as.factor(titanic$Sex)
+titanic$Survived <- as.factor(titanic$Survived)
 titanic %>% str
 
 #############################################
 # Vamos construir a árvore de classificação #
-arvore <- rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked,
+arvore <- rpart::rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked,
                 data=titanic,
                 parms = list(split = 'gini'), # podemos trocar para  'information'
-                method='class' # Essa opção indica que a resposta é qualitativa
+                method='class'                # Essa opção indica que a resposta é qualitativa
 )
 
 #########################
@@ -84,6 +97,11 @@ paleta = scales::viridis_pal(begin=.75, end=1)(20)
 # Plotando a árvore
 rpart.plot::rpart.plot(arvore,
                        box.palette = paleta) # Paleta de cores
+
+# salvando em .png
+dev.print(file = '_out/script_001/figures/plotando_arvore.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
 
 ##############################
 # Avaliação básica da árvore #
@@ -99,8 +117,20 @@ class = prob[,2]>.5 #2 - sobreviveu
 tab <- table(class, titanic$Survived)
 tab
 
+sink(file = '_out/script_001/output/matriz_confusao.txt')
+print(tab)
+sink()
+
 acc <- (tab[1,1] + tab[2,2])/ sum(tab)
 acc
 
+sink(file = '_out/script_001/output/acc.txt')
+print(acc)
+sink()
+
 # importancia das variáveis -> variable.importance
 arvore$variable.importance
+
+sink(file = '_out/script_001/output/variable_importance.txt')
+print(arvore$variable.importance)
+sink()

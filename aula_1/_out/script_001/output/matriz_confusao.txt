@@ -1,0 +1,4 @@
+       
+class     N   Y
+  FALSE 498  98
+  TRUE   51 244

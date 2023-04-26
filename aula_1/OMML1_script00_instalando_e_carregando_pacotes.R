@@ -7,7 +7,10 @@ pacotes <- c('titanic',    # carrega a base original titanic_treino
              'gtools',     # funções auxiliares como quantcut,
              'Rmisc',      # carrega a função sumarySE para a descritiva
              'scales',     # importa paletas de cores
-             'caret'       # Funções úteis para machine learning
+             'caret',      # Funções úteis para machine learning
+             "readxl",    # 
+             "writexl",
+             "plotROC"
              )
 
 if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
