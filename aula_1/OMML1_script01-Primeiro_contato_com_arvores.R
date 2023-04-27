@@ -5,6 +5,9 @@
 #Titanic
 setwd("C:\\Users\\Renato\\Dropbox\\pos_usp\\ML\\neural_network_algorithms\\aula_1")
 titanic <- as.data.frame(read_excel("titanic.xlsx"))
+titanic$Embarked <- as.factor(titanic$Embarked)
+titanic$Sex <- as.factor(titanic$Sex)
+titanic$Survived <- as.factor(titanic$Survived)
 head(titanic)
 titanic %>% head
 #################################

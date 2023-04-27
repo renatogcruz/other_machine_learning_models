@@ -128,7 +128,7 @@ dev.print(file = '_out/script_002/figures/roc_teste.png',
 tab_cp <- rpart::printcp(arvore)
 tab_cp
 
-sink(file = '_out/script_002/output/tab_cp_pos_poda.txt')
+sink(file = '_out/script_002/output/tab_cp_pos_poda_Grid_Search.txt')
 print(tab_cp)
 sink()
 
@@ -140,6 +140,10 @@ dev.print(file = '_out/script_002/figures/arvore.png',
 
 tab_cp[which.min(tab_cp[,'xerror']),]
 cp_min <- tab_cp[which.min(tab_cp[,'xerror']),'CP']
+
+sink(file = '_out/script_002/output/cp_min.txt')
+print(cp_min)
+sink()
 
 set.seed(1)
 arvore_poda <- rpart::rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked,

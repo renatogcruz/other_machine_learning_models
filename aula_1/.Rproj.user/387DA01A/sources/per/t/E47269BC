@@ -3,7 +3,7 @@
     "path": "C:/Users/Renato/Dropbox/pos_usp/ML/neural_network_algorithms/aula_1/OMML1_script01-Primeiro_contato_com_arvores.R",
     "project_path": "OMML1_script01-Primeiro_contato_com_arvores.R",
     "type": "r_source",
-    "hash": "2200816011",
+    "hash": "2410408812",
     "contents": "",
     "dirty": false,
     "created": 1650886774983.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "102,63",
-        "scrollLine": "88"
+        "cursorPosition": "10,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1682530028,
+    "lastKnownWriteTime": 1682617494,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1682530028527,
+    "last_content_update": 1682617494400,
     "read_only": false,
     "read_only_alternatives": []
 }
