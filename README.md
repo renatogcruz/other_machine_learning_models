@@ -8,9 +8,33 @@
 
 # script 002
 
+
+
+#### acc treino
+
+```Acurácia na base de treino: 98%```
+
+#### acc teste
+
+```Acurácia na base de teste: 81%```
+
+#### Aval Treino
+
+```
+      ROC      Sens      Spec 
+0.9984630 0.9832936 0.9800000
+```
+
 #### CurvaROC treino
 
 <img width="512" alt="roc_treino" src="https://user-images.githubusercontent.com/32683908/234896944-ca5de4b8-fceb-42af-9dc2-41c120bb1f5b.png">
+
+#### Aval Teste
+
+```
+      ROC      Sens      Spec 
+0.7778010 0.8769231 0.7065217
+```
 
 #### CurvaROC teste
 
@@ -18,6 +42,8 @@
 
 
 ## pós-poda (Grid Search)
+
+#### Tamanho da árvore
 
 <img width="512" alt="arvore" src="https://user-images.githubusercontent.com/32683908/234896924-14a9fd48-ee02-4643-a618-3bc9dade5e64.png">
 
@@ -64,9 +90,23 @@ arvore_poda <- rpart::rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare
                                                     maxdepth = 30)
 ```
 
+#### Aval Treino
+
+```
+      ROC      Sens      Spec 
+0.9984630 0.9832936 0.9800000
+```
+
 #### CurvaROC treino
 
 <img width="512" alt="CurvaROC_pos_poda_treino" src="https://user-images.githubusercontent.com/32683908/234896936-6af0e0e9-a721-4dae-b34e-50f1e2874206.png">
+
+#### Aval Teste
+
+```
+      ROC      Sens      Spec 
+0.7778010 0.8769231 0.7065217
+```
 
 #### CurvaROC teste
 
