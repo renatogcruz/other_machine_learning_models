@@ -4,7 +4,9 @@
 #####
 # Gerando os dados
 # x é uma sequencia de valores entre 0 e 1
+set.seed(2360873)
 x <- seq(0,1, length.out=1000)
+x %>% head
 
 # y segue uma relação quadrática
 a <- 0
@@ -22,6 +24,13 @@ p0 <- ggplot(df, aes(x,y)) +
         legend.spacing.x = unit(0, 'cm'))
 p0
 
+# salvando em .png
+dev.print(file = '_out/figures/plot_distribuicao_dados_observados.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+# salvando em .png
+dev.print(file = '_out/figures/plot_distribuicao_dados_observados_2.png',
+          device = png)
+
 ########################
 # Construindo a árvore #
 tree <- rpart(y~x, 
@@ -32,6 +41,10 @@ tree <- rpart(y~x,
 paleta = scales::viridis_pal(begin=.75, end=1)(20)
 rpart.plot::rpart.plot(tree,
                        box.palette = paleta) # Paleta de cores
+
+# salvando em .png
+dev.print(file = '_out/figures/arvore.png',
+          device = png, width = 1024, height = 768, res = 2*72)
 
 # Valores preditos
 df['p'] = predict(tree, df)
@@ -51,6 +64,12 @@ boost0_O_vs_E <- ggplot(df, aes(x,y)) +
 
 boost0_O_vs_E
 
+
+# salvando em .png
+dev.print(file = '_out/figures/plot_distribuicao_dados_esperados.png',
+          device = png, width = 1024, height = 768, res = 2*72)
+
+
 # Gráfico de resíduos
 boost0_res <- ggplot(df, aes(x,r)) + 
   geom_point(alpha=.7, size=.5, aes(colour='Resíduo')) +
@@ -65,4 +84,8 @@ boost0_res
 ggpubr::ggarrange(boost0_O_vs_E, boost0_res, 
           # labels = c("A", "B"),
           ncol = 2, nrow = 1)
+
+# salvando em .png
+dev.print(file = '_out/figures/plot_residuos.png',
+          device = png, width = 1024, height = 768, res = 2*72)
 

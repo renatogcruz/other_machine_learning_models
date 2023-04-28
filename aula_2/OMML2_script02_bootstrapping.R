@@ -39,3 +39,6 @@ p <- data.frame(estimativas) %>%
   )
 p
 
+# salvando em .png
+dev.print(file = '_out/figures/quantis_bootstrapping.png',
+          device = png, width = 1024, height = 768, res = 2*72)

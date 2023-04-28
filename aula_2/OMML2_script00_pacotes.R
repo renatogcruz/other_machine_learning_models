@@ -1,7 +1,6 @@
 ########################
 # Instalação de pacotes
-pacotes <- c(
-             'tidyverse',  # Pacote básico de datawrangling
+pacotes <- c('tidyverse',  # Pacote básico de datawrangling
              'rpart',      # Biblioteca de árvores
              'rpart.plot', # Conjunto com Rpart, plota a parvore
              'gtools',     # funções auxiliares como quantcut,
@@ -26,4 +25,5 @@ if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
 } else {
   sapply(pacotes, require, character = T) 
 }
-?milticlass.roc
+
+# ?milticlass.roc
